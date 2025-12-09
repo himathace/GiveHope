@@ -3,7 +3,7 @@
 import sqlite3 from "sqlite3"
 import {open} from "sqlite"
 
-export async function CreateTable() {
+export default async function CreateTable() {
 
     const DB=await open({
         filename:"./impact.db",
