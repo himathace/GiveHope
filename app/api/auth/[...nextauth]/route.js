@@ -3,6 +3,8 @@ import Credentials from "next-auth/providers/credentials";
 import CredentialsProvider from "next-auth/providers/credentials"
 import CreateTable from "@/lib/database"
 import bcrypt from "bcrypt"
+import {email, z} from "zod"
+import { use } from "react";
 
 
 
@@ -11,26 +13,26 @@ const authoptions={
         CredentialsProvider({
             name:"credentials",
             async  authorize(Credentials){
+
+                if(!Credentials?.email || !Credentials?.password){
+                    return null
+                }
     
                 const db=await CreateTable()
-    
-                if(Credentials.email.length===0){
+
+                const user=await db.get("select email,password from users where email=?",[Credentials.email])
+                console.log(user)
+
+                if(!user){
                     return null
                 }
-                if(Credentials.password.length===0){
+
+                const isvalidpassword=await bcrypt.compare(Credentials.password,user.password)
+                if(!isvalidpassword){
                     return null
                 }
-    
-                const checkemail=db.get("select * from users where email=?",[Credentials.email])
-                if(!checkemail){
-                    return null
-                }
-    
-                const checkpassword=await bcrypt.compare(Credentials.password,checkemail.password)
-                if(!checkpassword){
-                    return null
-                }
-                return {message:"hello"}
+
+                return {username:user.username,email:user.email}
             }
         }),
     ],
