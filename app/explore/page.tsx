@@ -2,8 +2,17 @@ import { Heart } from 'lucide-react';
 import Image from "next/image";
 import { Users } from 'lucide-react';
 import { MapPin } from 'lucide-react';
+import { cookies } from 'next/headers';
+import { verifyToken } from "@/lib/jwt";
 
-export default function ExploreNGOpage(){
+export default async function ExploreNGOpage(){
+
+    const cookieStore = await cookies();
+    const token = cookieStore.get("AUTH")?.value;
+    const user = token ? verifyToken(token) : null;
+    const username = user && typeof user !== 'string' ? user.username : null;
+    console.log(username)
+    
     return(
 
         <div>
@@ -21,7 +30,14 @@ export default function ExploreNGOpage(){
                 <p>About</p>
                 </div>
                 <div className="flex gap-x-3">
-                    <button className="bg-white px-5 py-2 border border-gray-300 flex items-center justify-center rounded-lg text-sm font-semibold">Sign in</button>
+
+                    {
+                        username ? 
+
+                        <button className="bg-white px-5 py-2 border border-gray-300 flex items-center justify-center rounded-lg text-sm font-semibold">{username}</button> :
+
+                        <button className="bg-white px-5 py-2 border border-gray-300 flex items-center justify-center rounded-lg text-sm font-semibold">Sign in</button>
+                    }
                     <button className="bg-white px-5 py-2 border text-sm font-semibold flex items-center justify-center rounded-lg bg-linear-to-r from-teal-600 to-teal-500 text-white">Start an Ngo</button>
                 </div>
             </div>

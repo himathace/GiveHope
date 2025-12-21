@@ -1,7 +1,6 @@
 "use client"
 
 import { Heart } from 'lucide-react';
-import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
 
@@ -14,21 +13,39 @@ export default  function Login(){
 
     async function senddata(){
 
-        const results=await signIn("credentials",{
-            email:email,
-            password:password,
-            redirect:false
+        // const results=await signIn("credentials",{
+        //     email:email,
+        //     password:password,
+        //     redirect:false
+        // })
+        // if(results?.error){
+        //     setvalidations("Invalid Email or Password")
+        //     // Clear input fields on validation error
+        //     setemail("")
+        //     setpassword("")
+        // }
+        // else if(results?.ok){
+        //     // Clear validation errors on success
+        //     // setvalidations("")
+        //     alert("welcome")
+        // }
+
+        const userdata=await fetch("/api/auth/login",{
+            method:"POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify({
+                email:email,
+                password:password
+            })
         })
-        if(results?.error){
-            setvalidations("Invalid Email or Password")
-            // Clear input fields on validation error
-            setemail("")
-            setpassword("")
-        }
-        else if(results?.ok){
-            // Clear validation errors on success
-            // setvalidations("")
-            alert("welcome")
+        const data=await userdata.json()
+        
+        if(data.success){
+            window.location.href = "/"
+        } else {
+            setvalidations(data.message)
         }
     }
 
