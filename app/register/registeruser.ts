@@ -13,6 +13,7 @@ export async function RegisterUSER(prevState:any,formdata:FormData){
         const username=formdata.get("fullname") as string
         const email=formdata.get("email") as string
         const password=formdata.get("password") as string
+        const role="user"
 
 
         const userinsertdata:usertype={
@@ -76,7 +77,7 @@ export async function RegisterUSER(prevState:any,formdata:FormData){
         }
 
         const hashpassword=await bcrypt.hash(password,10)
-        await db.run('INSERT INTO users (username,email,password) VALUES (?,?,?)',[username,email,hashpassword])
+        await db.run('INSERT INTO users (role,username,email,password) VALUES (?,?,?,?)',[role,username,email,hashpassword])
         await db.close()
     }catch(error){
         console.log(error)

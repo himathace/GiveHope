@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { verifyToken } from "@/lib/jwt";
 import { Heart } from 'lucide-react';
+import Link from 'next/link';
 
 export default async function NavBar(){
 
@@ -20,10 +21,18 @@ export default async function NavBar(){
                 <p className="text-xl font-bold font-times">ImpactHub</p>
             </div>
             <div className="flex gap-x-6 text-gray-600 font-medium">
-            <p>Explore</p>
-            <p>Campaigns</p>
-            <p>Stories</p>
-            <p>About</p>
+                <Link href={"/explore"} >
+                    <p>Explore</p>
+                </Link>
+                <Link href={"/campaigns"}>
+                    <p>Campaigns</p>
+                </Link>
+                <Link href={"/stories"}>
+                    <p>Stories</p>
+                </Link>
+                <Link href={"/about"}>
+                    <p>About</p>
+                </Link>
             </div>
             <div className="flex gap-x-3">
 

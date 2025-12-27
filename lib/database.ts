@@ -13,6 +13,7 @@ export default async function CreateTable() {
     await DB.exec(`
         CREATE TABLE IF NOT EXISTS users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        role TEXT NOT NULL,
         username TEXT UNIQUE NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL);
