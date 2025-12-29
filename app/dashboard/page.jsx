@@ -1,18 +1,26 @@
 import { cookies } from "next/headers"
+import {getsession} from "../../lib/auth"
+import { getuserdetails } from "../../lib/auth"
+import LogoutButton from "../components/logout"
 
 
 
 export default async function Dashboard(){
 
-    const cookieStore = await cookies()
-    const sessionid = cookieStore.get("session")?.value
-    
-    if(!sessionid){
-        return <h1>not authenticated</h1>
+    const sesssion=await getsession()
+    if(!sesssion){
+        return <h1 className="h-screen flex items-center">not authenticated ????</h1>
     }
 
-    
+    const user=await getuserdetails(sesssion.userid)
+
     return(
-        <h1>hello</h1>
+
+        <div className="h-screen flex items-center">
+            <h1>hello {user.username}</h1>
+            <LogoutButton />
+
+        </div>
+
     )
 }

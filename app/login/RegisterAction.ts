@@ -6,13 +6,12 @@ import bcrypt from "bcrypt"
 import { redirect } from "next/navigation"
 import crypto from "crypto"
 import { cookies } from "next/headers"
+import { redis } from "@/lib/redis"
 
 const userschema=z.object({
     email:z.string().min(1,"Field cannot be empty"),
     password:z.string().min(1,"Field cannot be empty")
 })
-
-const sessions=[]
 
 export default async function registeruser(formdata:FormData) {
 
@@ -37,15 +36,17 @@ export default async function registeruser(formdata:FormData) {
         return console.log("Invalid email or password")
     }
 
-    console.log("login successfull")
+    const sessiondata={
+        userid:user.id,
+        role:user.role
+    }
 
-    const sessionid=crypto.randomUUID()
-    await db.run('INSERT INTO sessioninfo (session_id,user_id) VALUES (?,?)',[sessionid,user.id])
+    const sessionid=crypto.randomBytes(32).toString("hex")
+    await redis.set(`session: ${sessionid}`,sessiondata,{ex:60*60*24})
     const cookieStore = await cookies()
     cookieStore.set("session",sessionid,{
         httpOnly:true,
         secure:true,
         sameSite:"lax",
-        
     })
 }

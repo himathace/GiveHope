@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@upstash/redis": "^1.36.0",
     "bcrypt": "^6.0.0",
     "better-auth": "^1.4.7",
     "jsonwebtoken": "^9.0.3",

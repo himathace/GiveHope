@@ -3,6 +3,7 @@
 import { Heart } from 'lucide-react';
 import { RegisterUSER} from './registeruser';
 import { useActionState } from 'react';
+import Link from 'next/link';
 
 export default function Register(){
 
@@ -27,7 +28,7 @@ export default function Register(){
                     <input type='password' name='password' defaultValue={state?.error?.hasOwnProperty("password") ? "" : state?.userdata.Password}  className={`${state?.error?.password && "border border-red-500 placeholder:text-red-500 text-sm " } font-light mt-2 border border-gray-500 h-9 rounded-lg px-2`} placeholder={` ${state?.error?.password ? state.error.password[0] : "*********"}`} />
                     <button className='mt-5 bg-linear-to-r from-teal-600 to-teal-500 h-10  rounded-xl text-sm text-white font-medium' type='submit' disabled={pending}>Create Account</button>
                 </form>
-                <p className='mt-2 text-sm text-gray-500 flex justify-center gap-x-2'>Dont have an account <span className='text-teal-500'>sign in</span> </p>
+                <p className='mt-2 text-sm text-gray-500 flex justify-center gap-x-2'>Dont have an account <Link className='text-teal-500' href="/login">sign in</Link> </p>
             </div>
         </div>
     )
