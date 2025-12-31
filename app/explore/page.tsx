@@ -4,6 +4,8 @@ import { Users } from 'lucide-react';
 import { MapPin } from 'lucide-react';
 
 
+
+
 export default async function ExploreNGOpage(){
 
     
@@ -79,38 +81,9 @@ export default async function ExploreNGOpage(){
                     <button className='px-10 py-2 rounded-xl bg-white border border-teal-500 text-teal-500'>Load More NGOs</button>
                 </div>
             </div>
-            <div>
-                <div className='flex  mt-10 p-10 justify-between items-center text-white bg-blue-950'>
-                    <div>
-                        <p className='text-xl font-serif'>Stay Updated</p>
-                        <p className='text-gray-300'>Get the latest stories and campaigns delivered to your inbox.</p>
-                    </div>
-                    <div className='flex gap-x-3'>
-                        <input type='text' className='h-10 rounded-xl'/>
-                        <button className='px-10 py-2 bg-orange-500 rounded-xl'>subscribe</button>
-                    </div>
-                </div>
-                <div className='flex p-10 justify-between items-center text-white bg-blue-950'>
-                    <div>
-                        <p className='text-xl font-serif'>Stay Updated</p>
-                        <p className='text-gray-300'>Get the latest stories and campaigns delivered to your inbox.</p>
-                    </div>
-                    <div className='flex gap-x-3'>
-                        <input type='text' className='h-10 rounded-xl'/>
-                        <button className='px-10 py-2 bg-orange-500 rounded-xl'>subscribe</button>
-                    </div>
-                </div>
-                <div className='flex p-10 justify-between items-center text-white bg-blue-950'>
-                    <div>
-                        <p className='text-xl font-serif'>Stay Updated</p>
-                        <p className='text-gray-300'>Get the latest stories and campaigns delivered to your inbox.</p>
-                    </div>
-                    <div className='flex gap-x-3'>
-                        <input type='text' className='h-10 rounded-xl'/>
-                        <button className='px-10 py-2 bg-orange-500 rounded-xl'>subscribe</button>
-                    </div>
-                </div>
-            </div>
+
+            
+            
         </div>
         
     )

@@ -12,7 +12,7 @@ export default async function Dashboard(){
         return <h1 className="h-screen flex items-center">not authenticated ????</h1>
     }
 
-    const user=await getuserdetails(sesssion.userid)
+    const user=await getuserdetails((sesssion as { userid: string }).userid)
 
     return(
 

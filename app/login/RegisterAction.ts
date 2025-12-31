@@ -13,7 +13,7 @@ const userschema=z.object({
     password:z.string().min(1,"Field cannot be empty")
 })
 
-export default async function registeruser(formdata:FormData) {
+export default async function registeruser(prevState:any, formdata:FormData) {
 
     const db=await CreateTable()
 
@@ -21,19 +21,19 @@ export default async function registeruser(formdata:FormData) {
     const password=formdata.get("password") as string
 
     if(!email || !password){
-        return console.log("Field cannot be empty")
+        return {message:"Field cannot be empty !"}
     }
     
     const user=await db.get("select * from users where email=?",[email])
     console.log(user)
 
     if(!user){
-        return console.log("Invalid username or password")
+        return {message:"Invalid username or password"}
     }
     
     const isvalidpassword=await bcrypt.compare(password,user.password)
     if(!isvalidpassword){
-        return console.log("Invalid email or password")
+        return {message:"Invalid email or password"}
     }
 
     const sessiondata={
