@@ -33,7 +33,7 @@ export default async function ExploreNGOs(){
                 <div className='grid grid-cols-3 gap-5 mt-5'>
                     {
                         list.map((NGO)=>(
-                            <Card key={NGO.id} title={NGO.title} description={NGO.description} />
+                            <Card key={NGO.id} id={NGO.id} title={NGO.title} description={NGO.description} />
                         ))
                         
                     }

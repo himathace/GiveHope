@@ -1,12 +1,14 @@
 import Image from "next/image"
 import { MapPin,Users } from "lucide-react"
+import Link from "next/link"
 
 type NGOtype={
+    id:String,
     title:string,
     description:String
 }
 
-export default function Card({title,description}:NGOtype){
+export default function Card({id,title,description}:NGOtype){
     return(
 
         <div className="border border-gray-300 rounded-2xl">
@@ -26,7 +28,9 @@ export default function Card({title,description}:NGOtype){
                     <p className="text-sm text-gray-500">12,500</p>
                 </div>
                 </div>
-                <button className="border border-gray-300 mt-4 w-full py-2 rounded-xl font-medium hover:bg-teal-500 hover:text-white transition-all duration-200">View Profile</button>
+                <Link  href={`ngo/${id}`}>
+                    <button className="border border-gray-300 mt-4 w-full py-2 rounded-xl font-medium hover:bg-teal-500 hover:text-white transition-all duration-200">View Profile</button>
+                </Link>
             </div>
         </div>
     )

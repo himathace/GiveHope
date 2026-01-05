@@ -45,8 +45,10 @@ export default async function NavBar(){
                 
                 
                 }
-
-                <button className="bg-white px-5 py-2 border text-sm font-semibold flex items-center justify-center rounded-lg bg-linear-to-r from-teal-600 to-teal-500 text-white">Start an Ngo</button>
+                
+                <Link  href="/start-ngo">
+                    <button className="bg-white px-5 py-2 border text-sm font-semibold flex items-center justify-center rounded-lg bg-linear-to-r from-teal-600 to-teal-500 text-white">Start an Ngo</button>
+                </Link>
             </div>
         </div>
     )

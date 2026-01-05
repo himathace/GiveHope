@@ -1,7 +1,11 @@
 import Image from "next/image"
+import getNgoProfile from "@/lib/ngoprofile"
 
 export default async function Profile({ params }: { params: { id: string } }){
     const {id}=await params
+    const profile=await getNgoProfile(id)
+
+
 
     return (
         <div className="flex flex-col">
@@ -13,8 +17,8 @@ export default async function Profile({ params }: { params: { id: string } }){
                         <p>Environment</p>
                         <p>verified</p>
                     </div>
-                    <p className="text-white text-5xl font-times font-bold">Ocean Guardians</p>
-                    <p className="text-slate-300 text-lg font-serif">Protecting marine ecosystems through community-driven conservation efforts.</p>
+                    <p className="text-white text-5xl font-times font-bold">{profile.title}</p>
+                    <p className="text-slate-300 text-lg font-serif">{profile.description}</p>
                 </div>
             </div>
             <div className="flex bg-slate-100">
@@ -23,7 +27,7 @@ export default async function Profile({ params }: { params: { id: string } }){
 
                     <div className="shadow p-5 rounded-2xl bg-white">
                         <p className="text-2xl font-serif font-medium">About us</p>
-                        <p className="text-slate-600 mt-2 font-normal">Ocean Guardians is a non-profit organization dedicated to preserving our oceans and marine life. Founded in 2010, we have been at the forefront of marine conservation, working with local communities, scientists, and policymakers to protect vulnerable marine ecosystems. Our initiatives include beach cleanups, coral reef restoration, marine wildlife protection programs, and educational outreach to schools and communities.</p>
+                        <p className="text-slate-600 mt-2 font-normal">{profile.about}</p>
                         
                     </div>
                     <div className="shadow p-5 rounded-2xl bg-white">
