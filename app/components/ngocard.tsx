@@ -28,9 +28,15 @@ export default function Card({id,title,description}:NGOtype){
                     <p className="text-sm text-gray-500">12,500</p>
                 </div>
                 </div>
-                <Link  href={`ngo/${id}`}>
-                    <button className="border border-gray-300 mt-4 w-full py-2 rounded-xl font-medium hover:bg-teal-500 hover:text-white transition-all duration-200">View Profile</button>
-                </Link>
+                <div className="flex gap-x-5 my-5 p-2 border-t border-gray-300  items-center">
+                    <div className="bg-amber-200 rounded-full w-10 h-10"></div>
+                    <div>
+                        <p>Maria Santos</p>
+                        <p>Program Director, SolarHope</p>
+                    </div>
+                    <p>January 15, 2026</p>
+                    <p>5 min read</p>
+                </div>
             </div>
         </div>
     )
