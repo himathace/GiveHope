@@ -1,5 +1,6 @@
-
-
+import "../(Main)/globals.css";
+import NavBar from "../components/navbar";
+import Footer from "../components/footer";
 
 export default function AdminLayout({
   children,
@@ -9,7 +10,9 @@ export default function AdminLayout({
   return (
     <html>
       <body>
+        <NavBar />
         {children}  
+        <Footer />
       </body>
     </html>
   );
