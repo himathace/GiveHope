@@ -6,6 +6,8 @@ import { getApprovedNGOsCount } from "../lib/dashboarddetails"
 import { getTotalUsersCount } from "../lib/dashboarddetails"
 import PendingApplicationCard from "../components/card"
 import { getPendingApplicationDetails } from "../lib/dashboarddetails"
+import { getapprovedapplicationDetails } from "../lib/dashboarddetails"
+import PocessedApplications from "../components/processedapplications"
 
 export default async function Admin(){
 
@@ -25,6 +27,10 @@ export default async function Admin(){
     const usercount=await getTotalUsersCount()
     const applicationdetails=await getPendingApplicationDetails()
     console.log(applicationdetails)
+    const approvedapplications=await getapprovedapplicationDetails()
+
+
+
 
 
 
@@ -85,15 +91,27 @@ export default async function Admin(){
                         email={app.contact_email}
                         phone={app.contact_phone}
                         name={app.username}
+                        id= {app.id}
+                        userid={app.user_id}
+                        mission={app.mission_statement}
+                        website={app.ngo_website}
+                        address={app.address}
                     />
                 ))
             }
             
             <p className="mt-5 text-2xl font-bold">Processed Applications</p>
-            <div className="flex mt-3 border p-10 bg-white rounded-2xl justify-center border-gray-400">
-                health care
-                kadawath, dsada
-            </div>
+            {
+                approvedapplications.map((val:any) => (
+                    <PocessedApplications
+                        key={val.id}
+                        ngoname={val.ngo_name}
+                        city={val.city}
+                        country={val.country}
+                        status={val.application_status}
+                    />
+                ))
+            }
         </div>
 
     )

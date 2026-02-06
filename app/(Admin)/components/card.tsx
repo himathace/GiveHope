@@ -1,4 +1,11 @@
-export default function PendingApplicationCard({title,location,country,category,description,email,phone,name}:any){
+"use client"
+
+import { approveApplication } from "../lib/actions"
+import { rejectApplication } from "../lib/actions"
+
+export default function PendingApplicationCard({title,location,country,category,description,email,phone,name,id,userid,mission,website,address}:any){
+
+
     return(
         <div className="bg-white p-5 rounded-2xl mt-5 border border-gray-500">
             <p className="text-2xl font-bold font-times">{title}</p>
@@ -12,8 +19,8 @@ export default function PendingApplicationCard({title,location,country,category,
             <p className="text-sm text-gray-500">Email: {email}</p>
             <p className="text-sm text-gray-500">Phone: {phone}</p>
             <div className="mt-3">
-                <button className="bg-green-500 text-white p-2 rounded-lg mr-3">Approve</button>
-                <button className="bg-red-500 text-white p-2 rounded-lg">Reject</button>
+                <button className="bg-green-500 text-white p-2 rounded-lg mr-3" onClick={async()=>{await approveApplication(id,userid,title,location,country,category,description,email,phone,mission,website,address)}}>Approve</button>
+                <button className="bg-red-500 text-white p-2 rounded-lg" onClick={async()=>{await rejectApplication(id)}}>Reject</button>
             </div>
         </div>
     )

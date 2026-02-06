@@ -2,6 +2,7 @@ import { Heart } from "lucide-react"
 import { Newspaper } from 'lucide-react';
 import { getsession } from "@/lib/auth";
 import ApplicationFormAction from "./formaction";
+import getApplicationStatus from "@/lib/applicationstatus";
 
 
 export default async function StartNGO(){
@@ -9,7 +10,7 @@ export default async function StartNGO(){
     const session=await getsession()
     if(!session){
         return (
-            <div className="flex justify-center mt-30">
+            <div className="flex justify-center my-40"> 
                 <div className="border border-gray-500 p-10 flex flex-col items-center justify-center rounded-2xl">
                     <Newspaper size={60} className="p-3 text-teal-500 bg-slate-200 rounded-full" />
                     <h1 className="mt-5 text-2xl font-times font-medium">Sign In Required</h1>
@@ -21,6 +22,35 @@ export default async function StartNGO(){
 
         )
     }
+
+    const status=await getApplicationStatus()
+    if(status?.[0]?.application_status==='approved'){
+        return(
+            <div className="flex justify-center my-40">
+                <div className="border border-gray-500 p-10 flex flex-col items-center justify-center rounded-2xl">
+                    <Newspaper size={60} className="p-3 text-green-500 bg-slate-200 rounded-full" />
+                    <h1 className="mt-5 text-2xl font-times font-medium">Application Approved</h1>
+                    <p className="mt-2  text-gray-600">Congratulations! Your NGO application has been approved. </p>
+                    <p className="  text-gray-600">You can now log in and start managing your organization.</p>
+                </div>
+            </div>
+        )
+    }
+
+    if(status?.[0]?.application_status==='pending'){
+        return(
+            <div className="flex justify-center my-40">
+                <div className="border border-gray-500 p-10 flex flex-col items-center justify-center rounded-2xl">
+                    <Newspaper size={60} className="p-3 text-green-500 bg-slate-200 rounded-full" />
+                    <h1 className="mt-5 text-2xl font-times font-medium">Application Submitted!</h1>
+                    <p className="mt-2  text-gray-600">Thank you for submitting your NGO application. Our team </p>
+                    <p className="  text-gray-600">will review your application and get back to you within 3-5 </p>
+                    <p className="  text-gray-600">business days.</p>
+                </div>
+            </div>
+        )
+    }
+    
 
 
     return (
